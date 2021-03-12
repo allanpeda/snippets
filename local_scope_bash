@@ -1,0 +1,12 @@
+#!/bin/bash
+# scope.sh
+
+fo='outer scope'
+
+_(){
+    local fo='inner scope'
+    echo $fo
+    unset -f _
+};_
+echo $fo
+ 
