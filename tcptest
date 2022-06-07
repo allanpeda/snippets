@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Two arguments: address to test and port number
+# defaults to localhost on port 80
+
+declare address="${1:-127.0.0.1}"
+declare -i port=${2:-80}
+
+while IFS=$'\n' read i
+do
+    echo "$i"
+    if [[ "${i:1:14}" =~ 'Connected to ' ]]; then
+        break
+    fi
+done < <(curl -sv telnet://"$address":"$port" 2>&1)
