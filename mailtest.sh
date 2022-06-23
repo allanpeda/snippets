@@ -9,7 +9,11 @@
 # Usage:
 # bash mailtest.sh someone@somewhere.com
 
-declare -r SMTP_SERVER='relay-mail.********.com'
+declare SMTP_SERVER='relay-mail.********.com'
+if [[ -f /etc/postfix/main.cf ]]; then
+    SMTP_SERVER=$(awk -F= '/^ *relayhost\>/ {gsub(/ /,"",$2); print $2}'  /etc/postfix/main.cf)
+fi 
+readonly SMTP_SERVER
 
 if [[ ${#1} -eq 0 ]]; then
     echo "Please priovide a mail recipient."
