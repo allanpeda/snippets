@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# This is a quick script to send test email messages
+# to the email server defined below.
+#
+# June 22, 2022
+# Allan Peda <allan.peda@gmail.com>
+#
+
 declare -r SMTP_SERVER='relay-mail.********.com'
 
 if [[ ${#1} -eq 0 ]]; then
