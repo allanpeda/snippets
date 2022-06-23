@@ -1,3 +1,4 @@
+#!/bin/bash
 # like sleep, but accepts interupts
 function snooze {
     sleep $1 &
