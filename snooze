@@ -1,0 +1,5 @@
+# like sleep, but accepts interupts
+function snooze {
+    sleep $1 &
+    wait $!
+} # snooze()
