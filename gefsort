@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Sort filter rules for Gnome Evolution
+# 2022 09 22
+
+set -eEuo pipefail
+
+declare -r IN="$1"
+
+declare line
+IFS=$'\n' read -r line < "$IN"; echo "$line"
+while IFS=$'\n' read -r line
+do
+   echo "$line"
+done < <(xq -x '.filteroptions.ruleset.rule|=sort_by(.title)' < "$IN")
