@@ -1,0 +1,29 @@
+genpw(){
+    declare -i limit="$1"
+    declare pw=''
+    _instr(){
+        declare -r str="$1"
+        declare -i sl=${#str}
+        declare -r chr="${2:0:1}"
+        declare -i ndx=$((RANDOM % ${sl}))
+        echo "${str:0:ndx}${chr}${str:$((ndx+1)):$((sl-ndx))}"
+    }
+    _randpluck(){
+        declare -ra arr=({a..z} {A..Z} {0..9})
+        IFS=''; declare str="${arr[*]// /}"
+        declare -i pos=$((RANDOM % ${#str}))
+        echo "${str:pos:1}"
+    }
+    while [[ ${#pw} -lt $limit ]]
+    do
+        # start with only digits
+        pw="$pw"$(_randpluck)
+    done
+    # MySQL mandatory special chars
+    declare c; for c in '#' '@' '%'
+    do
+        pw="$(_instr ${pw} ${c})"
+    done
+    echo "$pw"
+    unset -f _instr _randpluck
+} # genpw()
