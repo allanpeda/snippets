@@ -4,9 +4,9 @@
 fo='outer scope'
 
 _(){
-    local fo='inner scope'
-    echo $fo
     unset -f _
+    local fo='inner scope'
+    echo $f
 };_
 echo $fo
  
