@@ -85,3 +85,33 @@ if __name__ == '__main__':
 # - Business attack^This is one of seven categories
 # - Grudge attack^This is one of seven categories
 # - Terrorist attack^This is one of seven categories
+#
+# [
+#   {
+#     "question": "What is not a major category of computer crime?",
+#     "type": "multiple_choice",
+#     "answers": [
+#       {
+#         "answer": "Military installation attack",
+#         "correct": true,
+#         "feedback": "Correct this is not a category, though a military intelligence attack is."
+#       },
+#       {
+#         "answer": "Business attack",
+#         "correct": false,
+#         "feedback": "This is one of seven categories"
+#       },
+#       {
+#         "answer": "Grudge attack",
+#         "correct": false,
+#         "feedback": "This is one of seven categories"
+#       },
+#       {
+#         "answer": "Terrorist attack",
+#         "correct": false,
+#         "feedback": "This is one of seven categories"
+#       }
+#     ]
+#   }
+# ]
+#
