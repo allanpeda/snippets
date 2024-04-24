@@ -79,3 +79,9 @@ def chunk_questions(raw_question_array):
 
 if __name__ == '__main__':
     main(sys.argv[1])
+
+# 100 What is not a major category of computer crime?
+# - Military installation attack|Correct; this is not a category, though a military intelligence attack is.
+# - Business attack^This is one of seven categories
+# - Grudge attack^This is one of seven categories
+# - Terrorist attack^This is one of seven categories
