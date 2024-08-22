@@ -4,7 +4,7 @@
 # OpenWRT
 # August 22, 2024
 
-declare IPTMP TERTF tf
+declare IPTMP TERTF
 IPTMP=$(mktemp)
 TERTF=$(mktemp)
 
