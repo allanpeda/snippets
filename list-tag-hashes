@@ -5,6 +5,11 @@
 # from the command line
 # Allan Peda <allan.peda@gmail.com>
 
+# Typical usage:
+# (base) -bash-4.4$ list-tag-hashes | grep -F '8.3.12'
+# b4ecd9a php-8.3.12
+# b33aed7 php-8.3.12RC1
+
 set -eEuo pipefail
 
 # choose short (default) or long format
