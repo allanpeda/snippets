@@ -26,7 +26,7 @@ do
        if [[ "$FORMAT" == 'L' ]]
        then
            datestring="$(git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S %z' "$commit_hash")"
-           echo "${commit_hash} ${datestring} ${reftag:${HASHLEN}:(-1)}"
+           echo "${commit_hash} ${datestring} ${reftag:${HASHLEN}}"
        else
            datestring="$(git show -s --format=%cd --date=short "$commit_hash")"
            echo "${commit_hash:0:7} ${datestring} ${reftag#*"${REFSTAGS}"}"
