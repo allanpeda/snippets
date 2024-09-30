@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# list-tag-hashes
+# shows the tags as indicated on GitHub
+# from the command line
+# Allan Peda <allan.peda@gmail.com>
+
+set -eEuo pipefail
+
+# choose short (default) or long format
+declare FORMAT='S'
+if [[ "$#" -gt 0 && "${#1}" -gt 0 ]]
+then
+    if [[ "$1" == '--long' ]]
+    then
+        FORMAT='L'
+    fi
+fi
+
+declare -ri HASHLEN=40
+declare -r  REFSTAGS=' refs/tags/'
+declare objtype commit_hash
+while read -r objhash
+do
+   objtype="$(git cat-file -t "${objhash:0:${HASHLEN}}")"
+   if [[ "$objtype" == 'tag' ]]
+   then
+       commit_hash="$(git rev-parse "${objhash% *}"^{})"
+       if [[ "$FORMAT" == 'L' ]]
+       then
+           echo "${commit_hash} ${objhash#* }"
+       else
+           echo "${commit_hash:0:7} ${objhash#*"${REFSTAGS}"}"
+       fi
+
+   fi
+done < <(git show-ref --tags)
