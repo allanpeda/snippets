@@ -1,4 +1,3 @@
-(base) -bash-4.4$ cat /ipg/local/bin/list-tag-hashes
 #!/bin/bash
 
 # list_tags_hashes.sh
@@ -16,7 +15,7 @@ fi
 
 declare -ri HASHLEN=40
 declare -r  REFSTAGS=' refs/tags/'
-declare objtype objhash commit_hash
+declare objtype objhash commit_hash datestring
 while read -r reftag
 do
    objhash="${reftag:0:${HASHLEN}}"
@@ -26,9 +25,11 @@ do
        commit_hash="$(git rev-parse "${objhash}"^{})"
        if [[ "$FORMAT" == 'L' ]]
        then
-           echo "${commit_hash} ${objhash}"
+           datestring="$(git show -s --format=%cd --date=format:'%Y-%m-%d %H:%M:%S %z' "$commit_hash")"
+           echo "${commit_hash} ${datestring} ${reftag:${HASHLEN}:(-1)}"
        else
-           echo "${commit_hash:0:7} ${reftag#*"${REFSTAGS}"}"
+           datestring="$(git show -s --format=%cd --date=short "$commit_hash")"
+           echo "${commit_hash:0:7} ${datestring} ${reftag#*"${REFSTAGS}"}"
        fi
 
    fi
