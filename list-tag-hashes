@@ -1,18 +1,10 @@
+(base) -bash-4.4$ cat /ipg/local/bin/list-tag-hashes
 #!/bin/bash
 
-# list-tag-hashes
-# shows the commit hash and tag as indicated on GitHub
-# from the command line
-# Allan Peda <allan.peda@gmail.com>
-
-# Typical usage:
-# (base) -bash-4.4$ list-tag-hashes | grep -F '8.3.12'
-# b4ecd9a php-8.3.12
-# b33aed7 php-8.3.12RC1
+# list_tags_hashes.sh
 
 set -eEuo pipefail
 
-# choose short (default) or long format
 declare FORMAT='S'
 if [[ "$#" -gt 0 && "${#1}" -gt 0 ]]
 then
@@ -24,18 +16,19 @@ fi
 
 declare -ri HASHLEN=40
 declare -r  REFSTAGS=' refs/tags/'
-declare objtype commit_hash
-while read -r objhash
+declare objtype objhash commit_hash
+while read -r reftag
 do
-   objtype="$(git cat-file -t "${objhash:0:${HASHLEN}}")"
+   objhash="${reftag:0:${HASHLEN}}"
+   objtype="$(git cat-file -t "${objhash}")"
    if [[ "$objtype" == 'tag' ]]
    then
-       commit_hash="$(git rev-parse "${objhash% *}"^{})"
+       commit_hash="$(git rev-parse "${objhash}"^{})"
        if [[ "$FORMAT" == 'L' ]]
        then
-           echo "${commit_hash} ${objhash#* }"
+           echo "${commit_hash} ${objhash}"
        else
-           echo "${commit_hash:0:7} ${objhash#*"${REFSTAGS}"}"
+           echo "${commit_hash:0:7} ${reftag#*"${REFSTAGS}"}"
        fi
 
    fi
