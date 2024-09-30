@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # list-tag-hashes
-# shows the tags as indicated on GitHub
+# shows the commit hash and tag as indicated on GitHub
 # from the command line
 # Allan Peda <allan.peda@gmail.com>
 
